@@ -1,4 +1,5 @@
 # project files
+.DS_Store
 test/
 train/
 
