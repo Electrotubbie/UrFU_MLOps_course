@@ -1,4 +1,5 @@
 # project files
+.idea/
 model.pkl
 .DS_Store
 test/
