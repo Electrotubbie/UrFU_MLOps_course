@@ -1,4 +1,5 @@
 # project files
+model.pkl
 .DS_Store
 test/
 train/
