@@ -22,14 +22,16 @@ def X_y_save(path, train_test: Literal['train', 'test'], df, target_column):
     np.save(f'{path}y_{train_test}.npy', df[target_column].values)
 
 
-def preprocessing(df, num_columns=None, cat_columns=None):
+def preprocessing(X_train, X_test, num_columns=None, cat_columns=None):
     if num_columns:
         scaler = MinMaxScaler()
-        df[num_columns] = scaler.fit_transform(df[num_columns])
+        X_train[num_columns] = scaler.fit_transform(X_train[num_columns])
+        X_test[num_columns] = scaler.transform(X_test[num_columns])
     if cat_columns:
         encoder = OrdinalEncoder()
-        df[cat_columns] = encoder.fit_transform(df[cat_columns])
-    return df
+        X_train[cat_columns] = encoder.fit_transform(X_train[cat_columns])
+        X_test[cat_columns] = encoder.transform(X_test[cat_columns])
+    return X_train, X_test
 
 
 df_train = pd.read_csv(TRAIN_FILE, index_col=0)
@@ -38,8 +40,7 @@ df_test = pd.read_csv(TEST_FILE, index_col=0)
 cat_cols = df_train.dtypes[df_train.dtypes == 'object'].index.to_list()
 num_cols = df_train.drop('price', axis=1).dtypes[~(df_train.dtypes == 'object')].index.to_list()
 # предобработка данных перед обучением модели
-df_train = preprocessing(df_train, num_columns=num_cols, cat_columns=cat_cols)
-df_test = preprocessing(df_test, num_columns=num_cols, cat_columns=cat_cols)
+df_train, df_test = preprocessing(df_train, df_test, num_columns=num_cols, cat_columns=cat_cols)
 # сохранение полученных данных
 X_y_save(TRAIN_PATH, 'train', df_train, 'price')
 X_y_save(TEST_PATH, 'test', df_test, 'price')
