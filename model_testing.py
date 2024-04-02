@@ -11,4 +11,4 @@ with open('model.pkl', 'rb') as file:
 y_test_pred = model.predict(X_test)
 
 print(f'r2: {r2_score(y_test, y_test_pred)}')
-print(f'mse: {mse(y_test, y_test_pred, squared=False)}')
+print(f'rmse: {mse(y_test, y_test_pred, squared=False)}')
