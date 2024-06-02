@@ -1,0 +1,5 @@
+services:
+  app:
+    image: electrotubbie/web-app-lang-classify:latest
+    ports:
+      - "8501:8501"
