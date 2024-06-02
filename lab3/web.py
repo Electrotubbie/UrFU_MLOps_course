@@ -1,7 +1,7 @@
 from transformers import pipeline
 import streamlit as st
 
-classifier = pipeline(model="Helsinki-NLP/opus-mt-ru-en")
+classifier = pipeline("translation", model="facebook/nllb-200-distilled-600M")
 st.title('Перевод текста на английский язык')
 text = st.text_input('Введите текст на русском языке')
 result = st.button('Нажми, что бы перевести!')
