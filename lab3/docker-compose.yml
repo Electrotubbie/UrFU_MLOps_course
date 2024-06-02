@@ -1,5 +1,5 @@
 services:
   app:
-    image: electrotubbie/wep-app-lang-classify:latest
+    image: electrotubbie/web-app-lang-classify:latest
     ports:
       - "8501:8501"
